@@ -19,10 +19,14 @@ jobs:
       with:
         dotnet-version: 8.0.x
     - name: Restore dependencies
+      working-directory: ./DEVOPS
       run: dotnet restore
     - name: Build TestServer
+      working-directory: ./DEVOPS
       run: dotnet build --no-restore TestServer
     - name: Build TestServerTests
+      working-directory: ./DEVOPS
       run: dotnet build --no-restore TestServerTests
     - name: Test
+      working-directory: ./DEVOPS
       run: dotnet test --no-build --verbosity normal
