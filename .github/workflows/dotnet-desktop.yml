@@ -1,4 +1,4 @@
-name: .net first
+name: .NET Build & Test
 
 on:
   push:
@@ -14,17 +14,20 @@ jobs:
 
     steps:
     - uses: actions/checkout@v3
+    
     - name: Setup .NET
       uses: actions/setup-dotnet@v3
       with:
         dotnet-version: 8.0.x
-    - name: Restore dependencies
-      working-directory: TestServer
-      run: dotnet restore
+
+    - name: Restore dependencies for solution
+      run: dotnet restore TestServer/TestServer.sln
+
     - name: Build TestServer
-      run: dotnet build --no-restore TestServer
+      run: dotnet build --no-restore TestServer/TestServer.csproj
+
     - name: Build TestServerTests
-      working-directory: TestServerTests
-      run: dotnet build --no-restore TestServerTests
-    - name: Test
-      run: dotnet test --no-build --verbosity normal
+      run: dotnet build --no-restore TestServerTests/TestServerTests.csproj
+
+    - name: Run tests
+      run: dotnet test --no-build --verbosity normal TestServerTests/TestServerTests.csproj
