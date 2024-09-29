@@ -6,7 +6,7 @@ on:
   release:
     types: [created]
 env:
-  IMAGE_NAME: imagelab3
+  IMAGE_NAME: test
 
 jobs:
   push:
