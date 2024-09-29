@@ -4,11 +4,11 @@ on:
   release:
     types: [created]
 env:
-  IMAGE_NAME: imagelab3
+  IMAGE_NAME: test
 
 jobs:
   call_workflow_build_and_test:
-    uses: ./.github/workflows/dotnet-desktop.yml
+    uses: ./.github/workflows/dotnet-build-and-test.yml
   push_to_registry:
     name: Push Docker image to Docker Hub
     runs-on: ubuntu-latest
@@ -28,4 +28,4 @@ jobs:
           context: ./TestServer
           file: ./Dockerfile
           push: true
-          tags: ${{ secrets.DOCKER_USERNAME }}/${{ env.IMAGE_NAME }}:${{ github.event.release.tag_name }}, ${{ secrets.DOCKER_USERNAME }}/${{ env.IMAGE_NAME }}:latest
+          tags: ${{ secrets.DOCKER_USERNAME }}/$IMAGE_NAME:${{ github.event.release.tag_name }} , ${{ secrets.DOCKER_USERNAME }}/$IMAGE_NAME:latest
