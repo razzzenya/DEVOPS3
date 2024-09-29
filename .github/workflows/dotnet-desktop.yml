@@ -24,7 +24,7 @@ jobs:
     - name: Build TestServer
       run: dotnet build --no-restore TestServer
     - name: Build TestServerTests
-      working-directory: TestServerTest
+      working-directory: TestServerTests
       run: dotnet build --no-restore TestServerTests
     - name: Test
       run: dotnet test --no-build --verbosity normal
